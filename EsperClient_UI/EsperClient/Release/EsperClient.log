@@ -1,0 +1,150 @@
+﻿빌드 시작: 2016-03-21 오전 10:14:02
+     1>2 노드의 "C:\Users\wooPC\Source\Repos\Esper\Client\EsperClient_UI\EsperClient\EsperClient.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yc"stdafx.h" /Fp"Release\EsperClient.pch" /Fo"Release\\" /Fd"Release\EsperClient.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D WIN32 /D _WINDOWS /D NDEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Release\EsperClient.pch" /Fo"Release\\" /Fd"Release\EsperClient.pdb" /Gd /TP /analyze- /errorReport:prompt Communication.cpp EsperClient.cpp EsperClientDlg.cpp FileLayer.cpp JoinDlg.cpp jsoncpp.cpp LoginDlg.cpp SettingDlg.cpp WrapDlg.cpp
+         Communication.cpp
+     1>Communication.cpp(8): warning C4627: '#include <iostream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(8): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(11): warning C4627: '#include <cassert>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(11): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(12): warning C4627: '#include <string>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(12): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(13): warning C4627: '#include <vector>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(13): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(14): warning C4627: '#include "../../json/json.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(14): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(15): warning C4627: '#include "Communication.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         Communication.cpp(15): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>Communication.cpp(375): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+         EsperClient.cpp
+         EsperClientDlg.cpp
+     1>EsperClientDlg.cpp(149): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\corecrt_wstring.h(121): note: 'wcscpy' 선언을 참조하십시오.
+     1>EsperClientDlg.cpp(150): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\corecrt_wstring.h(121): note: 'wcscpy' 선언을 참조하십시오.
+     1>EsperClientDlg.cpp(151): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+         C:\Program Files (x86)\Windows Kits\10\Include\10.0.10150.0\ucrt\corecrt_wstring.h(121): note: 'wcscpy' 선언을 참조하십시오.
+         FileLayer.cpp
+     1>FileLayer.cpp(1): warning C4627: '#include "FileLayer.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         FileLayer.cpp(1): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>FileLayer.cpp(494): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+         JoinDlg.cpp
+         jsoncpp.cpp
+     1>jsoncpp.cpp(76): warning C4627: '#include "json.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(76): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(194): warning C4627: '#include <json/assertions.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(194): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(195): warning C4627: '#include <json/reader.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(195): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(196): warning C4627: '#include <json/value.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(196): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(197): warning C4627: '#include "json_tool.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(197): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(199): warning C4627: '#include <utility>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(199): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(200): warning C4627: '#include <cstdio>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(200): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(201): warning C4627: '#include <cassert>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(201): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(202): warning C4627: '#include <cstring>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(202): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(203): warning C4627: '#include <istream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(203): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(204): warning C4627: '#include <sstream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(204): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(205): warning C4627: '#include <memory>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(205): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(206): warning C4627: '#include <set>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(206): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(207): warning C4627: '#include <limits>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(207): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(213): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(211): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(215): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(213): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(218): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(215): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(221): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(218): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(2426): warning C4627: '#include <json/assertions.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2426): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2427): warning C4627: '#include <json/value.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2427): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2428): warning C4627: '#include <json/writer.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2428): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2431): warning C4627: '#include <sstream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2431): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2432): warning C4627: '#include <utility>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2432): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2433): warning C4627: '#include <cstring>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2433): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2434): warning C4627: '#include <cassert>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2434): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2436): warning C4627: '#include <cpptl/conststring.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2436): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2438): warning C4627: '#include <cstddef>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2438): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2439): warning C4627: '#include <algorithm>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2439): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(2451): warning C4005: 'ALIGNAS': 매크로 재정의
+         jsoncpp.cpp(2449): note: 'ALIGNAS'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(2573): warning C4627: '#include "json_valueiterator.inl"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(2573): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3991): warning C4627: '#include <json/writer.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3991): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3992): warning C4627: '#include "json_tool.h"': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3992): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3994): warning C4627: '#include <iomanip>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3994): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3995): warning C4627: '#include <memory>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3995): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3996): warning C4627: '#include <sstream>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3996): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3997): warning C4627: '#include <utility>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3997): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3998): warning C4627: '#include <set>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3998): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(3999): warning C4627: '#include <cassert>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(3999): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(4000): warning C4627: '#include <cstring>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(4000): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(4001): warning C4627: '#include <cstdio>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(4001): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(4008): warning C4627: '#include <ieeefp.h>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(4008): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(4009): warning C4005: 'isfinite': 매크로 재정의
+         jsoncpp.cpp(4005): note: 'isfinite'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4020): warning C4005: 'isfinite': 매크로 재정의
+         jsoncpp.cpp(4009): note: 'isfinite'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4023): warning C4005: 'isfinite': 매크로 재정의
+         jsoncpp.cpp(4020): note: 'isfinite'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4027): warning C4627: '#include <cmath>': 미리 컴파일된 헤더 사용을 찾을 때 건너뛰었습니다.
+         jsoncpp.cpp(4027): note: 'stdafx.h'에 지시문 추가 또는 미리 컴파일된 헤더 다시 빌드
+     1>jsoncpp.cpp(4029): warning C4005: 'isfinite': 매크로 재정의
+         jsoncpp.cpp(4023): note: 'isfinite'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4035): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(221): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4037): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(4035): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4039): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(4037): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4042): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(4039): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4045): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(4042): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4051): warning C4005: 'isfinite': 매크로 재정의
+         jsoncpp.cpp(4029): note: 'isfinite'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(4052): warning C4005: 'snprintf': 매크로 재정의
+         jsoncpp.cpp(4045): note: 'snprintf'의 이전 정의를 참조하십시오.
+     1>jsoncpp.cpp(5211): fatal error C1010: 미리 컴파일된 헤더를 찾는 동안 예기치 않은 파일의 끝이 나타났습니다. '#include "stdafx.h"'을(를) 소스에 추가하시겠습니까?
+         LoginDlg.cpp
+         SettingDlg.cpp
+         WrapDlg.cpp
+     1>c:\users\woopc\source\repos\esper\client\esperclient_ui\esperclient\FileLayer.h(10): fatal error C1083: 포함 파일을 열 수 없습니다. 'cryptlib.h': No such file or directory
+     1>"C:\Users\wooPC\Source\Repos\Esper\Client\EsperClient_UI\EsperClient\EsperClient.vcxproj" 프로젝트를 빌드했습니다(Build 대상). - 실패
+
+빌드하지 못했습니다.
+
+경과 시간: 00:00:15.40
