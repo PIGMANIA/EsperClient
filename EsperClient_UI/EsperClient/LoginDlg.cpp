@@ -9,6 +9,8 @@
 #include "Communication.h"
 #include "EsperClientDlg.h"
 #include <fstream>
+#include "RemindIdDlg.h"
+#include "RemindPwDlg.h"
 
 // LoginDlg 대화 상자입니다.
 
@@ -40,6 +42,8 @@ void LoginDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(LoginDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_OK, &LoginDlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_REGIST, &LoginDlg::OnBnClickedRegist)
+	ON_BN_CLICKED(IDC_FIND_ID, &LoginDlg::OnBnClickedFindId)
+	ON_BN_CLICKED(IDC_FIND_PW, &LoginDlg::OnBnClickedFindPw)
 END_MESSAGE_MAP()
 
 
@@ -153,4 +157,20 @@ void LoginDlg::OnBnClickedRegist()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CJoinDlg dlg;
 	dlg.DoModal();
+}
+
+
+void LoginDlg::OnBnClickedFindId()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CRemindIdDlg dlg;
+	dlg.DoModal();
+}
+
+
+void LoginDlg::OnBnClickedFindPw()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CRemindPwDlg dlg;
+	dlg.DoModal();	
 }

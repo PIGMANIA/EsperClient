@@ -194,11 +194,15 @@ BOOL CEsperClientDlg::OnInitDialog()
 	//char c_userid[20] = { 0, }, c_sessionkey[20] = { 0, };
 	ifstream fin;
 	fin.open("../idsk.txt");
-	fin >> m_userid >> m_sessionkey ;
+	fin >> m_userid >> m_sessionkey;
+	AfxMessageBox(m_userid.c_str(), MB_OK);
+	AfxMessageBox(m_sessionkey.c_str(), MB_OK);
 
 	Items item;
-	item.UserId = m_userid;
-	item.SessionKey = m_sessionkey;
+	item.UserId = m_userid;	
+	//item.SessionKey = m_sessionkey;
+	item.SessionKey = "f308ae81753fa95aa4fe957a132936";
+
 	string str;
 	if (sockSetting(s) == -1)
 		AfxMessageBox(_T("connection error!"), MB_OK);
@@ -359,7 +363,6 @@ void CEsperClientDlg::OnEnChangeEdit3()
 	//하고 마스크에 OR 연산하여 설정된 ENM_CHANGE 플래그를 지정하여 CRichEditCtrl().SetEventMask()를 호출하지 않으면
 	// 이 알림 메시지를 보내지 않습니다.
 
-	// TODO:  여기에 컨트롤 알림 처리기 코드를 추가합니다.
 }
 
 

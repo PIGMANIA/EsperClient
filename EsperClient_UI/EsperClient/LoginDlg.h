@@ -32,4 +32,6 @@ private:
 	
 public:
 	afx_msg void OnBnClickedRegist();
+	afx_msg void OnBnClickedFindId();
+	afx_msg void OnBnClickedFindPw();
 };

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 
 // CJoinDlg 대화 상자입니다.
 
@@ -19,6 +19,7 @@ public:
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
 	bool m_idCheck, m_emailCheck, m_authcodecheck;
+	std::string m_email;
 
 	DECLARE_MESSAGE_MAP()
 public:
