@@ -227,7 +227,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		//TREE 만들기
 
 		m_hRoot[0] = m_Tree.InsertItem(_T("파일명1"), 0, 1);
-		m_hRoot[1] = m_Tree.InsertItem(_T("파일명1"), 0, 1);
+		m_hRoot[1] = m_Tree.InsertItem(_T("파일명2"), 0, 1);
 		//m_Tree.SetFont(&m_font,1);
 
 		m_hKind[0] = m_Tree.InsertItem(_T("사람1"), 2, 2, m_hRoot[0], TVI_LAST);
@@ -235,10 +235,10 @@ BOOL CEsperClientDlg::OnInitDialog()
 		m_hKind[3] = m_Tree.InsertItem(_T("사람3"), 2, 2, m_hRoot[0], TVI_LAST);
 		m_hKind[4] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
 
-		m_hKind[0] = m_Tree.InsertItem(_T("사람1"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("사람2"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[3] = m_Tree.InsertItem(_T("사람3"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[4] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[0] = m_Tree.InsertItem(_T("사람5"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("사람6"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[3] = m_Tree.InsertItem(_T("사람7"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[4] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
 
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
@@ -542,4 +542,9 @@ void CEsperClientDlg::OnTreeselectAccess()
 void CEsperClientDlg::OnTreeselectDelete()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	HTREEITEM selitem = m_Tree.GetSelectedItem();
+	std::string filename(m_Tree.GetItemText(selitem));
+	std::string m_message = filename;
+	m_message.append("을 모든 유저로부터 삭제하시겠습니까?");
+	AfxMessageBox(m_message.c_str(), MB_YESNO);
 }
