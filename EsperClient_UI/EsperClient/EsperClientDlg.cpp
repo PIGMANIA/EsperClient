@@ -11,6 +11,7 @@
 #include "strsafe.h"
 #include "Communication.h"
 #include <fstream>
+#include <cstring>
 #include "AccessDlg.h"
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -200,8 +201,8 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 	Items item;
 	item.UserId = m_userid;	
-	//item.SessionKey = m_sessionkey;
-	item.SessionKey = "f308ae81753fa95aa4fe957a132936";
+	item.SessionKey = m_sessionkey;
+	
 
 	string str;
 	if (sockSetting(s) == -1)
@@ -216,16 +217,24 @@ BOOL CEsperClientDlg::OnInitDialog()
 		
 
 		//AfxMessageBox((LPCTSTR)str.c_str(), MB_OK);
-		//AfxMessageBox(str.c_str(), MB_OK);
+		AfxMessageBox(str.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer1.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer2.c_str(), MB_OK);
 		//AfxMessageBox(m_userid.c_str(), MB_OK);
 		//AfxMessageBox(m_sessionkey.c_str(), MB_OK);
+		str = "file1 : ";
+		for (unsigned int i = 0; i < finfo[0].userId.size();i++)
+			str.append(finfo[0].userId[i]);
+		str.append(",");
+		str.append(finfo[0].fileId);
+		str.append(",");
+		str.append(finfo[0].del);
 
+		AfxMessageBox(str.c_str(), MB_OK);
 
 
 		//TREE 만들기
-
+		/*
 		m_hRoot[0] = m_Tree.InsertItem(_T("파일명1"), 0, 1);
 		m_hRoot[1] = m_Tree.InsertItem(_T("파일명2"), 0, 1);
 		//m_Tree.SetFont(&m_font,1);
@@ -239,9 +248,19 @@ BOOL CEsperClientDlg::OnInitDialog()
 		m_hKind[2] = m_Tree.InsertItem(_T("사람6"), 2, 2, m_hRoot[1], TVI_LAST);
 		m_hKind[3] = m_Tree.InsertItem(_T("사람7"), 2, 2, m_hRoot[1], TVI_LAST);
 		m_hKind[4] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
-
+		*/
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
+		int length = sizeof(finfo) / sizeof(finfo[0]);
+		m_hRoot = new HTREEITEM[length];
+		m_hKind = new HTREEITEM[3];
+		for (unsigned int i = 0; i < length;i++)
+		{
+			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileId.c_str(),0,1);
+			for (unsigned int j = 0; i < 3; j++)
+				//m_hKind[j] = m_Tree.InsertItem()
+				;			
+		}
 
 
 		closesocket(s);

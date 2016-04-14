@@ -19,6 +19,8 @@ using namespace std;
 #pragma comment ( lib, "ws2_32.lib" )
 #pragma pack( 1 ) // 구조체에서 1byte 단위로 메모리를 Align하라는 지시어
 
+fileinfo* finfo = new fileinfo[1];
+vector<std::string> accessor;
 
 //SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 				  //int n = send(s,output.c_str(),size,0);
@@ -419,14 +421,13 @@ int socket_recv(int socket, std::string *str )
 		case 19://fileListReq
 			notAnArray = packet["result"];
 			resultpacketbuffer1 = notAnArray.asString();
-			if (resultpacketbuffer1 == "succ")
+			/*if (resultpacketbuffer1 == "succ")
 			{
 			File = packet["File"];
 			packetfilehead = NULL;
 			walker = NULL;
 			for (unsigned int index = 0; index < File.size(); ++index)
 			{
-
 
 				while (walker != NULL)
 				{
@@ -454,8 +455,37 @@ int socket_recv(int socket, std::string *str )
 
 				}
 			}
+			}*/
+
+			if (resultpacketbuffer1 == "succ")
+			{ 
+				File = packet["File"]; 
+				finfo = new fileinfo[File.size()];
+				Json::Value Filecomp;
+				Json::FastWriter fastwriter;
+				//finfo[0].id = fastwriter.write(Filecomp);
+				//finfo[0].id = Filecomp["userId"].asString();
+				//auto member = File.getMemberNames();*/
+				
+				
+				for (unsigned int i = 0; i < File.size(); i++)
+				{
+					for (unsigned int j = 0; j < File[i][2]["userId"].size();j++)
+					{
+						Filecomp = File[i][2]["userId"][j];
+						finfo[i].userId.push_back(fastwriter.write(Filecomp));
+					}
+					
+					Filecomp = File[i][1]["fileId"];
+					finfo[i].fileId = fastwriter.write(Filecomp);
+					Filecomp = File[i][3]["del"];
+					finfo[i].del = fastwriter.write(Filecomp);
+					Filecomp = File[i][0]["fileName"];
+				}
 			}
+
 			break;
+
 		case 20:
 			break;
 		case 21:

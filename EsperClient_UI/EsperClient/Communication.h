@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <vector>
 #include "../../json/json.h"
 using namespace std;
 #pragma comment ( lib, "ws2_32.lib" )
@@ -59,8 +60,21 @@ public:
 	packetfile(string fn) { filename = fn; next = NULL; receivernamehead = NULL; }
 
 };
+
+class fileinfo {
+public:
+	std::string fileName;
+	std::string fileId;
+	vector<std::string> userId;
+	std::string del;
+	fileinfo() { fileName = "";fileId = "";del = ""; }
+	
+};
+
 extern string resultpacketbuffer1;
 extern string resultpacketbuffer2;
 extern string resultpacketbuffer3;
 extern packetfile *packetfilehead;
+extern fileinfo *finfo;
 int socket_recv(int socket, std::string* str);
+
