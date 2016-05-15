@@ -194,7 +194,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 	//char c_userid[20] = { 0, }, c_sessionkey[20] = { 0, };
 	ifstream fin;
-	fin.open("../idsk.txt");
+	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 	fin >> m_userid >> m_sessionkey;
 	AfxMessageBox(m_userid.c_str(), MB_OK);
 	AfxMessageBox(m_sessionkey.c_str(), MB_OK);

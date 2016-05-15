@@ -36,7 +36,7 @@ BOOL CAccessDlg::OnInitDialog()
 	// TODO:  여기에 추가 초기화 작업을 추가합니다.
 
 	std::ifstream fin;
-	fin.open("../idsk.txt");
+	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 	fin >> m_userid >> m_sessionkey;
 
 	SetDlgItemText(IDC_ACCESS_STATIC_USERNAME, m_userid.c_str());
@@ -60,6 +60,7 @@ END_MESSAGE_MAP()
 
 void CAccessDlg::OnBnClickedAccessBttAdd()
 {
+	/*
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CString str;
 	GetDlgItem(IDC_ACCESS_EDIT_ADD)->GetWindowText(str);
@@ -94,11 +95,11 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 	socket_recv(s, &strtemp);
 
 	if (resultpacketbuffer1 == "succ")
-	{*/
+	{
 		m_authlistctrl.AddString(str);
 		UpdateData(TRUE);
 		item.Accessor.push_back(tempstr);
-	/* }
+	 }
 	else if (resultpacketbuffer1 == "fail")
 	{
 		AfxMessageBox(_T("잘못된 아이디입니다."));
@@ -110,6 +111,57 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 
 	closesocket(s);
 	WSACleanup();*/
+
+	CString str;
+	GetDlgItem(IDC_ACCESS_EDIT_ADD)->GetWindowText(str);
+	CT2CA temp(str);
+	string tempstr(temp);
+	ifstream fin;
+	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
+	fin >> m_userid >> m_sessionkey;
+	item.AccessorID = tempstr;
+	item.setId(m_userid);
+	item.SessionKey = m_sessionkey;
+
+	//통신 목표 설정
+	SOCKET s = socketCreate();
+	if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
+
+	SOCKADDR_IN addr;
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(4500);
+	addr.sin_addr.s_addr = inet_addr("165.132.144.106");
+	//if (connect(s, (SOCKADDR*)&addr, sizeof(addr)) == -1) {
+	//	AfxMessageBox(_T("connection(dir) error!"), MB_OK);
+	//}
+
+	if (sockSetting(s) == -1)
+		AfxMessageBox(_T("connection error!"), MB_OK);
+	else {
+		socket_send(s, "accessorCheck", item);
+		//closesocket(s);
+		//ShowWindow(SW_HIDE);
+	}
+	std::string strtemp;
+	socket_recv(s, &strtemp);
+
+	if (resultpacketbuffer1 == "succ")
+	{
+		m_authlistctrl.AddString(str);
+		UpdateData(TRUE);
+		item.Accessor.push_back(tempstr);
+	}
+	else if (resultpacketbuffer1 == "fail")
+	{
+		AfxMessageBox(_T("잘못된 아이디입니다."));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+		::SendMessage(GetSafeHwnd(), WM_CLOSE, NULL, NULL);
+	}
+
+	closesocket(s);
 }
 
 

@@ -68,7 +68,7 @@ void CWrapDlg::OnBnClickedButton1()
 	CT2CA temp(str);
 	string tempstr(temp);
 	ifstream fin;
-	fin.open("../idsk.txt");
+	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 	fin >> m_userid >> m_sessionkey;
 	item.AccessorID = tempstr;
 	item.setId(m_userid);
@@ -151,7 +151,7 @@ void CWrapDlg::OnBnClickedOk()
 	else {
 		socket_send(s, "wrappingReq", item);
 		//closesocket(s);
-		ShowWindow(SW_HIDE);
+		//ShowWindow(SW_HIDE);
 	}
 
 	string strtemp = NULL;
