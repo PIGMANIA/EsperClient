@@ -26,7 +26,7 @@ CAccessDlg::~CAccessDlg()
 void CAccessDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_ACCESS_EDIT_USERLIST, m_authlistctrl);
+	DDX_Control(pDX, IDC_LIST1, m_authlistctrl);
 }
 
 BOOL CAccessDlg::OnInitDialog()
@@ -144,12 +144,14 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 	}
 	std::string strtemp;
 	socket_recv(s, &strtemp);
-
+	AfxMessageBox(_T("1"));
 	if (resultpacketbuffer1 == "succ")
 	{
+		AfxMessageBox(_T("2"));
 		m_authlistctrl.AddString(str);
 		UpdateData(TRUE);
 		item.Accessor.push_back(tempstr);
+		AfxMessageBox(_T("3"));
 	}
 	else if (resultpacketbuffer1 == "fail")
 	{
