@@ -108,6 +108,7 @@
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
       <AdditionalOptions>/FORCE %(AdditionalOptions)</AdditionalOptions>
+      <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
