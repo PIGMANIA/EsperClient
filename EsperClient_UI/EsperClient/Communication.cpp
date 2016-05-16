@@ -476,12 +476,16 @@ int socket_recv(int socket, std::string *str )
 						finfo[i].userId.push_back(fastwriter.write(Filecomp));
 					}
 					
+
+					
 					Filecomp = File[i][1]["fileId"];
 					finfo[i].fileId = fastwriter.write(Filecomp);
 					Filecomp = File[i][3]["del"];
 					finfo[i].del = fastwriter.write(Filecomp);
 					Filecomp = File[i][0]["fileName"];
 				}
+
+				
 			}
 
 			break;

@@ -232,36 +232,51 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 		AfxMessageBox(str.c_str(), MB_OK);
 
-
-		//TREE 만들기
 		/*
+		//TREE 만들기
+		m_hRoot = new HTREEITEM[2];
+		m_hKind = new HTREEITEM[5];
 		m_hRoot[0] = m_Tree.InsertItem(_T("파일명1"), 0, 1);
 		m_hRoot[1] = m_Tree.InsertItem(_T("파일명2"), 0, 1);
 		//m_Tree.SetFont(&m_font,1);
 
 		m_hKind[0] = m_Tree.InsertItem(_T("사람1"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("사람2"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[3] = m_Tree.InsertItem(_T("사람3"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[4] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("사람2"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("사람3"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[3] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
 
 		m_hKind[0] = m_Tree.InsertItem(_T("사람5"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("사람6"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[3] = m_Tree.InsertItem(_T("사람7"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[4] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("사람6"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("사람7"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[3] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
 		*/
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
-		int length = sizeof(finfo) / sizeof(finfo[0]);
+		
+		int length = sizeof(finfo);		
+		AfxMessageBox(std::to_string(length).c_str());
+
 		m_hRoot = new HTREEITEM[length];
 		m_hKind = new HTREEITEM[3];
+
+		//AfxMessageBox(finfo[3].userId[0].c_str());
+		AfxMessageBox(finfo[3].fileId.c_str());
 		for (unsigned int i = 0; i < length;i++)
 		{
-			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileId.c_str(),0,1);
-			for (unsigned int j = 0; i < 3; j++)
-				//m_hKind[j] = m_Tree.InsertItem()
-				;			
-		}
+			AfxMessageBox(_T("Round"));
+			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
+			AfxMessageBox(finfo[i].fileName.c_str());
+			m_hKind = new HTREEITEM[finfo[i].userId.size()];
+			AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
+			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
+			{
+				m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
 
+			}
+				
+			AfxMessageBox(_T("Clear"));
+		}
+		
 
 		closesocket(s);
 		WSACleanup();
