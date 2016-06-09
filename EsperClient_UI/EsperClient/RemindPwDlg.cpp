@@ -70,7 +70,7 @@ void CRemindPwDlg::OnBnClickedOk()
 	if (sockSetting(s) == -1)
 		AfxMessageBox(_T("connection error!"), MB_OK);
 	else {
-		socket_send(s, "findID", item);
+		socket_send(s, "findPasswd", item);
 		resultpacketbuffer1 = "";
 		resultpacketbuffer2 = "";
 		resultpacketbuffer3 = "";
@@ -85,9 +85,9 @@ void CRemindPwDlg::OnBnClickedOk()
 		//AfxMessageBox(resultpacketbuffer1.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer2.c_str(), MB_OK);
 
-		if (resultpacketbuffer3 == "refusal")
+		if (resultpacketbuffer3 == "fail")
 			AfxMessageBox(TEXT(" 해당하는 ID가 존재하지 않습니다."), MB_OK);
-		else if (resultpacketbuffer3 == "approval") {
+		else if (resultpacketbuffer3 == "succ") {
 			std::string message = "비밀번호는 입니다.";
 		}
 		else

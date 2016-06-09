@@ -59,7 +59,7 @@ int socket_send(int socket, string Type, Items item) {
 		root["ID"] = item.Id;
 		root["passwd"] = item.Pw;
 		root["name"] = item.Name;
-		root["Email"] = item.Email;
+		root["email"] = item.Email;
 		root["date"] = item.date;
 	}
 	else if (Type == "signIn") {
@@ -72,11 +72,11 @@ int socket_send(int socket, string Type, Items item) {
 	}
 	else if (Type == "findID") {
 		root["name"] = item.Name;
-		root["Email"] = item.Email;
+		root["email"] = item.Email;
 	}
 	else if (Type == "findPasswd") {
 		root["ID"] = item.Id;
-		root["Email"] = item.Email;
+		root["email"] = item.Email;
 	}
 	else if (Type == "changePasswd") {
 		root["ID"] = item.Id;
@@ -98,11 +98,19 @@ int socket_send(int socket, string Type, Items item) {
 		root["SessionKey"] = item.SessionKey;
 	}
 	else if (Type == "wrappingRes") {
-		root["FileId"] = item.FileId;
-		root["AccessorID"] = item.Accessor[0];
+		root["FileID"] = item.FileId;
+		Json::Value Accessorjson;
+		while (!item.Accessor.empty())
+		{
+			Accessorjson.append(item.Accessor.back());
+			item.Accessor.pop_back();
+		}
+		root["AccessorID"] = Accessorjson;
+
 		root["WrappingResult"] = "succ";
 		root["UserID"] = item.Id;
 		root["SessionKey"] = item.SessionKey;
+		root["FileName"] = item.Filed;
 	}
 	else if (Type == "auth") {
 		root["UserID"] = item.Id;
@@ -395,7 +403,7 @@ int socket_recv(int socket, std::string *str )
 			resultpacketbuffer1 = notAnArray.asString();
 			break;
 		case 13://wrapping1
-			notAnArray = packet["Filed"];
+			notAnArray = packet["FileId"];
 			resultpacketbuffer1 = notAnArray.asString();
 			notAnArray = packet["result"];
 			resultpacketbuffer2 = notAnArray.asString();
@@ -490,6 +498,7 @@ int socket_recv(int socket, std::string *str )
 					Filecomp = File[i][3]["del"];
 					finfo[i].del = fastwriter.write(Filecomp);
 					Filecomp = File[i][0]["fileName"];
+					finfo[i].fileName = fastwriter.write(Filecomp);
 				}
 
 				

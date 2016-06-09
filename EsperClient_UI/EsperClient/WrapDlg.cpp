@@ -91,7 +91,7 @@ void CWrapDlg::OnBnClickedButton1()
 	else {
 		socket_send(s, "accessorCheck", item);
 		//closesocket(s);
-		ShowWindow(SW_HIDE);
+		//ShowWindow(SW_HIDE);
 	}
 	std::string strtemp;
 	socket_recv(s, &strtemp);
@@ -154,13 +154,15 @@ void CWrapDlg::OnBnClickedOk()
 		//ShowWindow(SW_HIDE);
 	}
 
-	string strtemp = NULL;
+	string strtemp;
 	socket_recv(s, &strtemp);
-
+	
 	if (resultpacketbuffer2 == "succ")
 	{
+		
 		ST_FILE_LAYER_HEADER stFileLayerHeader;
-		stFileLayerHeader.dwServerId = stoi(resultpacketbuffer1);
+		stFileLayerHeader.dwServerId = atoi(resultpacketbuffer1.c_str());
+		AfxMessageBox(resultpacketbuffer1.c_str());
 		stFileLayerHeader.dwUserId = 1;
 
 		CT2CA pszConvertedAnsiString(Filepath), pszConvertedAnsiString2(dialog.GetFolderPath());
@@ -168,14 +170,19 @@ void CWrapDlg::OnBnClickedOk()
 		//std::string strInputFile("C:\\Users\\wooPC\\Desktop\\hello.hwp");
 		std::string strOutputFile(pszConvertedAnsiString2);
 		//std::string strOutputFile("C:\\Users\\wooPC\\Desktop");
-		DWORD dwRet = EncryptFileLayer(stFileLayerHeader, strInputFile, strOutputFile);
+		//DWORD dwRet = EncryptFileLayer(stFileLayerHeader, strInputFile, strOutputFile);
 
-		item.FileId = stoi(resultpacketbuffer1);
+		item.FileId = resultpacketbuffer1;
 		item.WrappingResult = "succ";
 		item.SessionKey = m_sessionkey;
+		item.Filed = strInputFile;
+		
+		
+		
+		item.FileName = Filename;
 
 		socket_send(s, "wrappingRes", item);
-		string strtemp = NULL;
+		string strtemp;
 		socket_recv(s, &strtemp);
 
 		if (resultpacketbuffer1 == "succ")

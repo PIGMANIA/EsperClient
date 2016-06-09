@@ -264,9 +264,9 @@ BOOL CEsperClientDlg::OnInitDialog()
 		for (unsigned int i = 0; i < length;i++)
 		{
 			AfxMessageBox(_T("Round"));
-			//m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
+			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
 			//m_hRoot[i] = m_Tree.InsertItem(_T("abc"), 0, 1);
-
+			/*
 			TVINSERTSTRUCT tvInsert;
 			tvInsert.hParent = NULL;
 			tvInsert.hInsertAfter = TVI_LAST;
@@ -279,7 +279,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 			LPSTR s = const_cast<char *>(finfo[i].fileName.c_str());
 			tvInsert.item.pszText = s;
 
-			m_hRoot[i] = m_Tree.InsertItem(&tvInsert);
+			m_hRoot[i] = m_Tree.InsertItem(&tvInsert);*/
 
 			AfxMessageBox(finfo[i].fileName.c_str());
 			m_hKind = new HTREEITEM[finfo[i].userId.size()];

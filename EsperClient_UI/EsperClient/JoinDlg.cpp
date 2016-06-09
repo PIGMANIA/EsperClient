@@ -275,6 +275,7 @@ void CJoinDlg::OnBnClickedJoinOk()
 			item.Pw = sPw;
 			item.Name = sName;
 			item.Email = sEmail;
+			item.date = "2014-02-16";
 			string str;
 			socket_send(s, "signUp", item);
 			socket_recv(s, &str);
