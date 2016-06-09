@@ -7,6 +7,7 @@
 #include "afxdialogex.h"
 #include <fstream>
 #include "Communication.h"
+#include <vector>
 
 
 // CAccessDlg 대화 상자입니다.
@@ -170,5 +171,35 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 void CAccessDlg::OnBnClickedOk()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//id, session
+	ifstream fin;
+	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
+	fin >> m_userid >> m_sessionkey;
+	item.setId(m_userid);
+	item.SessionKey = m_sessionkey;
+	vector<string> Acc;
+	Acc.push_back("abb");
+	item.Accessor=Acc;
+	
+	//통신 목표 설정
+	SOCKET s = socketCreate();
+	if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
+
+
+	if (sockSetting(s) == -1)
+		AfxMessageBox(_T("connection error!"), MB_OK);
+	else {
+		socket_send(s, "wrappingReq", item);
+		//closesocket(s);
+		//ShowWindow(SW_HIDE);
+	}
+
+	string strtemp = NULL;
+	socket_recv(s, &strtemp);
+
+	
+
+	closesocket(s);
+
 	CDialogEx::OnOK();
 }

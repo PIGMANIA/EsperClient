@@ -20,6 +20,7 @@ using namespace std;
 #pragma pack( 1 ) // 구조체에서 1byte 단위로 메모리를 Align하라는 지시어
 
 fileinfo* finfo = new fileinfo[1];
+int flength=0;
 vector<std::string> accessor;
 
 //SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -125,6 +126,11 @@ int socket_send(int socket, string Type, Items item) {
 		root["Filename"] = item.FileName;
 		root["del"] = item.del;
 		root["SessionKey"] = item.SessionKey;
+		for (int i = 0; i < item.Accessor.size(); i++)
+		{
+			root["Accessor"][i]["id"] = item.Accessor[i];
+			root["Accessor"][i]["del"] = 0;
+		}
 	}
 	else if (Type == "fileListReq") {
 		root["UserID"] = item.UserId;
@@ -461,6 +467,7 @@ int socket_recv(int socket, std::string *str )
 			{ 
 				File = packet["File"]; 
 				finfo = new fileinfo[File.size()];
+				flength = File.size();
 				Json::Value Filecomp;
 				Json::FastWriter fastwriter;
 				//finfo[0].id = fastwriter.write(Filecomp);

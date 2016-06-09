@@ -253,30 +253,44 @@ BOOL CEsperClientDlg::OnInitDialog()
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
 		
-		int length = sizeof(finfo);		
+		int length = flength;		
 		AfxMessageBox(std::to_string(length).c_str());
 
 		m_hRoot = new HTREEITEM[length];
 		m_hKind = new HTREEITEM[3];
 
 		//AfxMessageBox(finfo[3].userId[0].c_str());
-		AfxMessageBox(finfo[3].fileId.c_str());
+		//AfxMessageBox(finfo[3].fileId.c_str());
 		for (unsigned int i = 0; i < length;i++)
 		{
 			AfxMessageBox(_T("Round"));
-			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
+			//m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
+			//m_hRoot[i] = m_Tree.InsertItem(_T("abc"), 0, 1);
+
+			TVINSERTSTRUCT tvInsert;
+			tvInsert.hParent = NULL;
+			tvInsert.hInsertAfter = TVI_LAST;
+			tvInsert.item.mask = TVIF_TEXT;
+			tvInsert.item.state = 0;
+			tvInsert.item.stateMask = 0;
+			tvInsert.item.cchTextMax = 60;
+			tvInsert.item.lParam = i;
+			tvInsert.item.cChildren = 0;
+			LPSTR s = const_cast<char *>(finfo[i].fileName.c_str());
+			tvInsert.item.pszText = s;
+
+			m_hRoot[i] = m_Tree.InsertItem(&tvInsert);
+
 			AfxMessageBox(finfo[i].fileName.c_str());
 			m_hKind = new HTREEITEM[finfo[i].userId.size()];
 			AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
 			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{
 				m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
-
 			}
 				
 			AfxMessageBox(_T("Clear"));
-		}
-		
+		}		
 
 		closesocket(s);
 		WSACleanup();
@@ -539,7 +553,6 @@ void CEsperClientDlg::OnNMRClickTree1(NMHDR *pNMHDR, LRESULT *pResult)
 	if (current_item != NULL) {
 		// 마우스가 위치한 항목을 찾았다면 해당 항목을 선택한다.
 		m_Tree.Select(current_item, TVGN_CARET);
-
 		selId = m_Tree.GetItemText(current_item);
 		hItem = m_Tree.GetSelectedItem();
 
@@ -566,6 +579,17 @@ void CEsperClientDlg::OnTreeselectAccess()
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	CAccessDlg dlg;
 	HTREEITEM selitem = m_Tree.GetSelectedItem();
+
+	TVITEM tvItem = { 0 };
+	tvItem.mask = TVIF_PARAM;
+	tvItem.hItem = selitem;
+	m_Tree.GetItem(&tvItem);
+
+	int index = (int)tvItem.lParam;
+	CString cs;
+	cs.Format(_T("%d"), index);
+	AfxMessageBox(cs);
+
 	std::string filename(m_Tree.GetItemText(selitem));
 	dlg.setFilename(filename);
 	dlg.DoModal();
@@ -577,8 +601,35 @@ void CEsperClientDlg::OnTreeselectDelete()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	HTREEITEM selitem = m_Tree.GetSelectedItem();
+	
 	std::string filename(m_Tree.GetItemText(selitem));
 	std::string m_message = filename;
 	m_message.append("을 모든 유저로부터 삭제하시겠습니까?");
-	AfxMessageBox(m_message.c_str(), MB_YESNO);
+	if (AfxMessageBox(m_message.c_str(), MB_YESNO) == IDYES)
+	{
+		SOCKET s = socketCreate();
+		if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
+		
+		ifstream fin;
+		fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
+		fin >> m_userid >> m_sessionkey;
+
+		Items item;
+		item.UserId = m_userid;
+		item.SessionKey = m_sessionkey;
+		//finfo[].
+
+		string str;
+		if (sockSetting(s) == -1)
+			AfxMessageBox(_T("connection error!"), MB_OK);
+		else {
+			socket_send(s, "remoteDel", item);
+			string result[20];
+
+			//if()
+
+			socket_recv(s, &str);
+		}
+	}
+		
 }

@@ -58,7 +58,6 @@ public:
 	string filename;
 	receiverIdclass* receivernamehead;
 	packetfile(string fn) { filename = fn; next = NULL; receivernamehead = NULL; }
-
 };
 
 class fileinfo {
@@ -76,5 +75,6 @@ extern string resultpacketbuffer2;
 extern string resultpacketbuffer3;
 extern packetfile *packetfilehead;
 extern fileinfo *finfo;
+extern int flength;
 int socket_recv(int socket, std::string* str);
 
