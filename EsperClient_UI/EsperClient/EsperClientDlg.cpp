@@ -196,8 +196,6 @@ BOOL CEsperClientDlg::OnInitDialog()
 	ifstream fin;
 	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 	fin >> m_userid >> m_sessionkey;
-	AfxMessageBox(m_userid.c_str(), MB_OK);
-	AfxMessageBox(m_sessionkey.c_str(), MB_OK);
 
 	Items item;
 	item.UserId = m_userid;	
@@ -258,13 +256,14 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 		m_hRoot = new HTREEITEM[length];
 		m_hKind = new HTREEITEM[3];
-
+		
 		//AfxMessageBox(finfo[3].userId[0].c_str());
 		//AfxMessageBox(finfo[3].fileId.c_str());
 		for (unsigned int i = 0; i < length;i++)
 		{
 			//AfxMessageBox(_T("Round"));
 			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
+			
 			//m_hRoot[i] = m_Tree.InsertItem(_T("abc"), 0, 1);
 			/*
 			TVINSERTSTRUCT tvInsert;
@@ -287,8 +286,9 @@ BOOL CEsperClientDlg::OnInitDialog()
 			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{
 				m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
-			}
 				
+			}
+			
 			//AfxMessageBox(_T("Clear"));
 		}		
 
@@ -619,6 +619,7 @@ void CEsperClientDlg::OnTreeselectDelete()
 		item.SessionKey = m_sessionkey;
 		//finfo[].
 
+		//  fileId 찾기
 		for (int i = 0; i < flength; i++)
 		{
 			if (finfo[i].fileName == filename)
@@ -635,6 +636,16 @@ void CEsperClientDlg::OnTreeselectDelete()
 			//if()
 
 			socket_recv(s, &str);
+
+
+			if (resultpacketbuffer1 == "succ")
+			{
+				AfxMessageBox(_T("원격 삭제가 완료되었습니다."));
+			}
+			else
+			{
+				AfxMessageBox(_T("원격 삭제에 실패했습니다."));
+			}
 		}
 	}
 		

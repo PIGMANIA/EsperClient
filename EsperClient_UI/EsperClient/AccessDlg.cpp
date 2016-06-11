@@ -206,7 +206,7 @@ void CAccessDlg::OnBnClickedOk()
 	}
 	else
 	{
-		AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+		AfxMessageBox(_T("접근 권한 변경에 실패했습니다."));
 	}
 	
 

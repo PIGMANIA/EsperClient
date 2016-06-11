@@ -123,6 +123,8 @@ void CWrapDlg::OnBnClickedOk()
 
 	CString SubFilename = Filename.Mid(0, (Filename.GetLength() - 4));
 	CFileDialog dialog((BOOL)FALSE, _T("esp"), SubFilename + _T(".esp"), OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("에스퍼(*.esp)|*.esp|모든파일(*.*)|*.*||"));
+	AfxMessageBox(SubFilename, MB_OK);
+	AfxMessageBox(Filename, MB_OK);
 
 	dialog.m_ofn.lpstrTitle = _T("파일 랩핑하기");
 	dialog.m_ofn.lStructSize = sizeof(OPENFILENAME) + 12;
