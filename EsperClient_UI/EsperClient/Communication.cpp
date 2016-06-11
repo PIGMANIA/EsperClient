@@ -134,11 +134,20 @@ int socket_send(int socket, string Type, Items item) {
 		root["Filename"] = item.FileName;
 		root["del"] = item.del;
 		root["SessionKey"] = item.SessionKey;
+		Json::Value accessors;
+		Json::Value access;
+		
 		for (int i = 0; i < item.Accessor.size(); i++)
 		{
-			root["Accessor"][i]["id"] = item.Accessor[i];
-			root["Accessor"][i]["del"] = 0;
+			accessors["id"] = item.Accessor[i];
+			accessors["del"] = "0";
+			//accessors[i].append(item.Accessor[i]);
+			//accessors[i].append("0");
+			access.append(accessors);
 		}
+
+		root["Accessor"] = access;
+		root["del"] = "0";
 	}
 	else if (Type == "fileListReq") {
 		root["UserID"] = item.UserId;

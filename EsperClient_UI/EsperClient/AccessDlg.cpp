@@ -175,11 +175,9 @@ void CAccessDlg::OnBnClickedOk()
 	ifstream fin;
 	fin.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 	fin >> m_userid >> m_sessionkey;
-	item.setId(m_userid);
+	item.UserId = m_userid;
 	item.SessionKey = m_sessionkey;
-	vector<string> Acc;
-	Acc.push_back("abb");
-	item.Accessor=Acc;
+	item.FileName = m_filename;
 	
 	//통신 목표 설정
 	SOCKET s = socketCreate();
@@ -189,14 +187,27 @@ void CAccessDlg::OnBnClickedOk()
 	if (sockSetting(s) == -1)
 		AfxMessageBox(_T("connection error!"), MB_OK);
 	else {
-		socket_send(s, "wrappingReq", item);
+		for (int i = 0; i < item.Accessor.size(); i++)
+		{
+
+			AfxMessageBox(item.Accessor[i].c_str());
+		}
+		socket_send(s, "authUpdate", item);
 		//closesocket(s);
 		//ShowWindow(SW_HIDE);
 	}
-
-	string strtemp = NULL;
+	
+	string strtemp;	 
+	AfxMessageBox(_T("Here1"));
 	socket_recv(s, &strtemp);
-
+	if (resultpacketbuffer2 == "succ")
+	{
+		AfxMessageBox(_T("접근 권한이 변경되었습니다."));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+	}
 	
 
 	closesocket(s);
