@@ -217,7 +217,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		
 
 		//AfxMessageBox((LPCTSTR)str.c_str(), MB_OK);
-		AfxMessageBox(str.c_str(), MB_OK);
+		//AfxMessageBox(str.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer1.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer2.c_str(), MB_OK);
 		//AfxMessageBox(m_userid.c_str(), MB_OK);
@@ -230,7 +230,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		str.append(",");
 		str.append(finfo[0].del);
 
-		AfxMessageBox(str.c_str(), MB_OK);
+		//AfxMessageBox(str.c_str(), MB_OK);
 
 		/*
 		//TREE ¸¸µé±â
@@ -254,7 +254,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
 		
 		int length = flength;		
-		AfxMessageBox(std::to_string(length).c_str());
+		//AfxMessageBox(std::to_string(length).c_str());
 
 		m_hRoot = new HTREEITEM[length];
 		m_hKind = new HTREEITEM[3];
@@ -263,7 +263,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		//AfxMessageBox(finfo[3].fileId.c_str());
 		for (unsigned int i = 0; i < length;i++)
 		{
-			AfxMessageBox(_T("Round"));
+			//AfxMessageBox(_T("Round"));
 			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,1);
 			//m_hRoot[i] = m_Tree.InsertItem(_T("abc"), 0, 1);
 			/*
@@ -281,15 +281,15 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 			m_hRoot[i] = m_Tree.InsertItem(&tvInsert);*/
 
-			AfxMessageBox(finfo[i].fileName.c_str());
+			//AfxMessageBox(finfo[i].fileName.c_str());
 			m_hKind = new HTREEITEM[finfo[i].userId.size()];
-			AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
+			//AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
 			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{
 				m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
 			}
 				
-			AfxMessageBox(_T("Clear"));
+			//AfxMessageBox(_T("Clear"));
 		}		
 
 		closesocket(s);
@@ -618,6 +618,12 @@ void CEsperClientDlg::OnTreeselectDelete()
 		item.UserId = m_userid;
 		item.SessionKey = m_sessionkey;
 		//finfo[].
+
+		for (int i = 0; i < flength; i++)
+		{
+			if (finfo[i].fileName == filename)
+				item.FileId = finfo[i].fileId;
+		}
 
 		string str;
 		if (sockSetting(s) == -1)
