@@ -11,10 +11,10 @@
 #include <string>
 #include <vector>
 #include "Communication.h"
-
+#include "json/json.h"
 //#include "afxdialogex.h"
 
-#include "../../json/json.h"
+//#include "../../json/json.h"
 using namespace std;
 #pragma comment ( lib, "ws2_32.lib" )
 #pragma pack( 1 ) // 구조체에서 1byte 단위로 메모리를 Align하라는 지시어

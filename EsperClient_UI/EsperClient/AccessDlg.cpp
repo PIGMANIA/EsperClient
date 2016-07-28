@@ -189,7 +189,6 @@ void CAccessDlg::OnBnClickedOk()
 	else {
 		for (int i = 0; i < item.Accessor.size(); i++)
 		{
-
 			AfxMessageBox(item.Accessor[i].c_str());
 		}
 		socket_send(s, "authUpdate", item);

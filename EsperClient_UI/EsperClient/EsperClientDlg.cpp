@@ -618,12 +618,13 @@ void CEsperClientDlg::OnTreeselectDelete()
 		item.UserId = m_userid;
 		item.SessionKey = m_sessionkey;
 		//finfo[].
-
+		item.FileId = "Err";
 		for (int i = 0; i < flength; i++)
 		{
 			if (finfo[i].fileName == filename)
 				item.FileId = finfo[i].fileId;
 		}
+
 
 		string str;
 		if (sockSetting(s) == -1)

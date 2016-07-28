@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "EsperClient.h"
 #include "WrapDlg.h"
+#include <time.h>
 
 #include "FileLayer.h"
 #include "Communication.h"
@@ -134,6 +135,9 @@ void CWrapDlg::OnBnClickedOk()
 
 	item.SessionKey = m_sessionkey;
 
+	//시간 측정
+	int begin[200], begin2[200], end[200], end2[200];
+
 	//통신 목표 설정
 	SOCKET s = socketCreate();
 	if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
@@ -156,7 +160,7 @@ void CWrapDlg::OnBnClickedOk()
 
 	string strtemp;
 	socket_recv(s, &strtemp);
-	
+
 	if (resultpacketbuffer2 == "succ")
 	{
 		
@@ -204,6 +208,95 @@ void CWrapDlg::OnBnClickedOk()
 	}
 
 	closesocket(s);
+	
+	
+	//반복 테스트 코드 
+
+	for (int i = 0; i < 200 ; i++) {
+
+		//통신 목표 설정
+		SOCKET s = socketCreate();
+		if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
+
+		SOCKADDR_IN addr;
+		addr.sin_family = AF_INET;
+		addr.sin_port = htons(4500);
+		addr.sin_addr.s_addr = inet_addr("165.132.144.106");
+		//if (connect(s, (SOCKADDR*)&addr, sizeof(addr)) == -1) {
+		//	AfxMessageBox(_T("connection(dir) error!"), MB_OK);
+		//}
+
+		if (sockSetting(s) == -1)
+			AfxMessageBox(_T("connection error!"), MB_OK);
+		else {
+			begin[i] = clock();
+			socket_send(s, "wrappingReq", item);
+			//closesocket(s);
+			//ShowWindow(SW_HIDE);
+		}
+
+		string strtemp;
+		socket_recv(s, &strtemp);
+		end[i] = clock();
+
+		if (resultpacketbuffer2 == "succ")
+		{
+
+			ST_FILE_LAYER_HEADER stFileLayerHeader;
+			stFileLayerHeader.dwServerId = atoi(resultpacketbuffer1.c_str());
+			//AfxMessageBox(resultpacketbuffer1.c_str());
+			stFileLayerHeader.dwUserId = 1;
+
+			CT2CA pszConvertedAnsiString(Filepath), pszConvertedAnsiString2(dialog.GetFolderPath());
+			std::string strInputFile(pszConvertedAnsiString);
+			//std::string strInputFile("C:\\Users\\wooPC\\Desktop\\hello.hwp");
+			std::string strOutputFile(pszConvertedAnsiString2);
+			//std::string strOutputFile("C:\\Users\\wooPC\\Desktop");
+			//DWORD dwRet = EncryptFileLayer(stFileLayerHeader, strInputFile, strOutputFile);
+
+			item.FileId = resultpacketbuffer1;
+			item.WrappingResult = "succ";
+			item.SessionKey = m_sessionkey;
+			item.Filed = strInputFile;
+
+
+
+			item.FileName = Filename;
+
+			begin2[i] = clock();
+			socket_send(s, "wrappingRes", item);
+			string strtemp;
+			socket_recv(s, &strtemp);
+			end2[i] = clock();
+
+			if (resultpacketbuffer1 == "succ")
+			{
+
+			}
+			else
+			{
+				wstring temp = wstring(strOutputFile.begin(), strOutputFile.end());
+				CString outfilePath = temp.c_str();
+				DeleteFile(outfilePath);
+				AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+			}
+
+		}
+		else
+		{
+			AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+		}
+
+		closesocket(s);
+
+	}
+	double time;
+	for (int i = 0;i < 200;i++)
+	time = (begin[i] + begin2[i] - end[i] - end2[i]);
+
+	time = time / CLOCKS_PER_SEC;
+	string message = "Duration for 200 times is " + std::to_string(time) + ".";
+	AfxMessageBox(message.c_str());
 
 }
 
