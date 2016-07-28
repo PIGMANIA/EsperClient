@@ -110,7 +110,7 @@ int socket_send(int socket, string Type, Items item) {
 		root["WrappingResult"] = "succ";
 		root["UserID"] = item.Id;
 		root["SessionKey"] = item.SessionKey;
-		root["FileName"] = item.Filed;
+		root["FileName"] = item.FileName;
 	}
 	else if (Type == "auth") {
 		root["UserID"] = item.Id;
@@ -139,15 +139,10 @@ int socket_send(int socket, string Type, Items item) {
 		
 		for (int i = 0; i < item.Accessor.size(); i++)
 		{
-			accessors["id"] = item.Accessor[i];
-			accessors["del"] = "0";
-			//accessors[i].append(item.Accessor[i]);
-			//accessors[i].append("0");
-			access.append(accessors);
+			access.append(item.Accessor[i]);
 		}
 
 		root["Accessor"] = access;
-		root["del"] = "0";
 	}
 	else if (Type == "fileListReq") {
 		root["UserID"] = item.UserId;
@@ -504,10 +499,13 @@ int socket_recv(int socket, std::string *str )
 					
 					Filecomp = File[i][1]["fileId"];
 					finfo[i].fileId = fastwriter.write(Filecomp);
+					finfo[i].fileId = finfo[i].fileId.substr(1, (finfo[i].fileId.length() - 2));
 					Filecomp = File[i][3]["del"];
 					finfo[i].del = fastwriter.write(Filecomp);
+					finfo[i].del = finfo[i].del.substr(1, finfo[i].del.length() - 2);
 					Filecomp = File[i][0]["fileName"];
 					finfo[i].fileName = fastwriter.write(Filecomp);
+					finfo[i].fileName = finfo[i].fileName.substr(1, finfo[i].fileName.length() - 3);
 				}
 
 				
