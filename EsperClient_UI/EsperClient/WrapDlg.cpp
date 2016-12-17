@@ -138,7 +138,7 @@ void CWrapDlg::OnBnClickedOk()
 	item.SessionKey = m_sessionkey;
 
 	//시간 측정
-	int begin[200], begin2[200], end[200], end2[200];
+	int begin[200], begin2[200], end[200], end2[200], start, finish;
 
 	//통신 목표 설정
 	SOCKET s = socketCreate();
@@ -211,7 +211,7 @@ void CWrapDlg::OnBnClickedOk()
 
 	closesocket(s);
 	
-	
+	/*
 	//반복 테스트 코드 
 
 	for (int i = 0; i < 200 ; i++) {
@@ -298,7 +298,7 @@ void CWrapDlg::OnBnClickedOk()
 
 	time = time / CLOCKS_PER_SEC;
 	string message = "Duration for 200 times is " + std::to_string(time) + ".";
-	AfxMessageBox(message.c_str());
+	AfxMessageBox(message.c_str());*/
 
 }
 

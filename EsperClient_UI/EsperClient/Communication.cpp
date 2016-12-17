@@ -35,7 +35,7 @@ int sockSetting(SOCKET s) {
 	SOCKADDR_IN addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(8000);
-	addr.sin_addr.s_addr = inet_addr("165.132.144.98");
+	addr.sin_addr.s_addr = inet_addr("165.132.120.126");
 	return connect(s, (SOCKADDR*)&addr, sizeof(addr));
 }
 

@@ -230,24 +230,24 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 		//AfxMessageBox(str.c_str(), MB_OK);
 
-		/*
+		
 		//TREE 만들기
 		m_hRoot = new HTREEITEM[2];
 		m_hKind = new HTREEITEM[5];
-		m_hRoot[0] = m_Tree.InsertItem(_T("파일명1"), 0, 1);
-		m_hRoot[1] = m_Tree.InsertItem(_T("파일명2"), 0, 1);
+		m_hRoot[0] = m_Tree.InsertItem(_T("test.hwp"), 0, 1);
+		m_hRoot[1] = m_Tree.InsertItem(_T("test2.hwp"), 0, 1);
 		//m_Tree.SetFont(&m_font,1);
 
-		m_hKind[0] = m_Tree.InsertItem(_T("사람1"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[1] = m_Tree.InsertItem(_T("사람2"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("사람3"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[3] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("sangwoo"), 2, 2, m_hRoot[0], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("jwyang"), 2, 2, m_hRoot[0], TVI_LAST);
+		//m_hKind[3] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
 
-		m_hKind[0] = m_Tree.InsertItem(_T("사람5"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[1] = m_Tree.InsertItem(_T("사람6"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("사람7"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[3] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
-		*/
+		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("khkim"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("jmhan"), 2, 2, m_hRoot[1], TVI_LAST);
+		//m_hKind[3] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
+		
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
 		//m_Tree.Expand(m_hRoot[1], TVE_EXPAND);
 		
@@ -285,7 +285,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 			//AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
 			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{
-				m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
+				//m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
 				
 			}
 				
