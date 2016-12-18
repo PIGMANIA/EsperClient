@@ -137,6 +137,7 @@ void CWrapDlg::OnBnClickedOk()
 
 	item.SessionKey = m_sessionkey;
 
+
 	//시간 측정
 	int begin[200], begin2[200], end[200], end2[200], start, finish;
 
@@ -147,7 +148,7 @@ void CWrapDlg::OnBnClickedOk()
 	SOCKADDR_IN addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(4500);
-	addr.sin_addr.s_addr = inet_addr("165.132.144.106");
+	addr.sin_addr.s_addr = inet_addr("165.132.120.126");
 	//if (connect(s, (SOCKADDR*)&addr, sizeof(addr)) == -1) {
 	//	AfxMessageBox(_T("connection(dir) error!"), MB_OK);
 	//}
@@ -169,14 +170,17 @@ void CWrapDlg::OnBnClickedOk()
 		ST_FILE_LAYER_HEADER stFileLayerHeader;
 		stFileLayerHeader.dwServerId = atoi(resultpacketbuffer1.c_str());
 		AfxMessageBox(resultpacketbuffer1.c_str());
-		stFileLayerHeader.dwUserId = 1;
-
-		CT2CA pszConvertedAnsiString(Filepath), pszConvertedAnsiString2(dialog.GetFolderPath());
+		stFileLayerHeader.dwUserId = atoi(m_userid.c_str());
+		
+		CString outPath = dialog.GetFolderPath();
+		CT2CA pszConvertedAnsiString(Filepath), pszConvertedAnsiString2(outPath);
+		
 		std::string strInputFile(pszConvertedAnsiString);
 		//std::string strInputFile("C:\\Users\\wooPC\\Desktop\\hello.hwp");
 		std::string strOutputFile(pszConvertedAnsiString2);
-		//std::string strOutputFile("C:\\Users\\wooPC\\Desktop");
-		//DWORD dwRet = EncryptFileLayer(stFileLayerHeader, strInputFile, strOutputFile);
+		AfxMessageBox(strOutputFile.c_str());
+		//std::string strOutputFile("C:\\Users\\wooPC\\Desktop\\abc");
+		DWORD dwRet = EncryptFileLayer(stFileLayerHeader, strInputFile, strOutputFile);
 
 		item.FileId = resultpacketbuffer1;
 		item.WrappingResult = "succ";
@@ -193,7 +197,9 @@ void CWrapDlg::OnBnClickedOk()
 
 		if (resultpacketbuffer1 == "succ")
 		{
-
+			//////////////////////////////
+			
+			
 		}
 		else
 		{

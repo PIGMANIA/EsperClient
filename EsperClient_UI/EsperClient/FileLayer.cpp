@@ -419,7 +419,7 @@ DWORD EncryptFileLayer(ST_FILE_LAYER_HEADER &refstFileLayerHeader, std::string &
 	stFileAttr.strFilePath = "";
 	stFileAttr.strFileName = strFileName;
 	stFileAttr.strFileOriginExt = strFileExtension;
-	stFileAttr.strFileEncExt = "enc";
+	stFileAttr.strFileEncExt = "esp";
 
 	pEncrypt->SetFileAttr(stFileAttr);
 	pEncrypt->SetFileHeader(refstFileLayerHeader);
