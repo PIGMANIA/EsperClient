@@ -135,25 +135,25 @@
     <Image Include="res\icon2.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\bitmap2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\file.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\file2.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\refresh.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\user.bmp">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="res\wrap.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
     <Image Include="..\..\..\..\..\Downloads\temp\wrap.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\temp\refresh.ico">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="res\bitmap1.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\temp\user.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\downloads\temp\bitmap2.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\temp\file.bmp">
-      <Filter>리소스 파일</Filter>
-    </Image>
-    <Image Include="..\..\..\..\..\Downloads\temp\file2.bmp">
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>

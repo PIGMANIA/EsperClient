@@ -254,13 +254,13 @@
     <None Include="res\EsperClient.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\..\downloads\temp\bitmap2.bmp" />
-    <Image Include="..\..\..\..\..\Downloads\temp\file.bmp" />
-    <Image Include="..\..\..\..\..\Downloads\temp\file2.bmp" />
-    <Image Include="..\..\..\..\..\Downloads\temp\refresh.ico" />
-    <Image Include="..\..\..\..\..\Downloads\temp\user.bmp" />
     <Image Include="..\..\..\..\..\Downloads\temp\wrap.ico" />
-    <Image Include="res\bitmap1.bmp" />
+    <Image Include="res\bitmap2.bmp" />
+    <Image Include="res\file.bmp" />
+    <Image Include="res\file2.bmp" />
+    <Image Include="res\refresh.ico" />
+    <Image Include="res\user.bmp" />
+    <Image Include="res\wrap.ico" />
     <Image Include="res\EsperClient.ico" />
     <Image Include="res\icon1.ico" />
     <Image Include="res\icon2.ico" />
