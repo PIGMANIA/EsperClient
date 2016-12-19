@@ -83,6 +83,8 @@ void CEsperClientDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_TREE1, m_Tree);
 	//DDX_Control(pDX, IDC_EDIT1, m_ebMsg);
 	//DDX_Text(pDX, IDC_EDIT1, m_strEdit);
+	DDX_Control(pDX, IDC_WRAPBUTTON, m_wrapButton);
+	DDX_Control(pDX, IDC_REFRESHBUTTON, m_refreshButton);
 }
 
 BEGIN_MESSAGE_MAP(CEsperClientDlg, CDialogEx)
@@ -107,6 +109,8 @@ BEGIN_MESSAGE_MAP(CEsperClientDlg, CDialogEx)
 	ON_NOTIFY(NM_RCLICK, IDC_TREE1, &CEsperClientDlg::OnNMRClickTree1)
 	ON_COMMAND(ID_TREESELECT_ACCESS, &CEsperClientDlg::OnTreeselectAccess)
 	ON_COMMAND(ID_TREESELECT_DELETE, &CEsperClientDlg::OnTreeselectDelete)
+	ON_BN_CLICKED(IDC_WRAPBUTTON, &CEsperClientDlg::OnBnClickedMfcbutton1)
+	ON_BN_CLICKED(IDC_REFRESHBUTTON, &CEsperClientDlg::OnBnClickedRefreshbutton)
 END_MESSAGE_MAP()
 
 
@@ -140,6 +144,19 @@ BOOL CEsperClientDlg::OnInitDialog()
 
 	// 이 대화 상자의 아이콘을 설정합니다.  응용 프로그램의 주 창이 대화 상자가 아닐 경우에는
 	//  프레임워크가 이 작업을 자동으로 수행합니다.
+
+	//Tree control 아이콘 설정
+	
+	
+	
+	
+	
+	
+
+	
+
+
+
 	m_hIcon = NULL;
 	//SetIcon(m_hIcon, TRUE);			// 큰 아이콘을 설정합니다.
 	//SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
@@ -180,6 +197,25 @@ BOOL CEsperClientDlg::OnInitDialog()
 	GetDlgItem(IDC_STATIC)->SetFont(&m_font);
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
 
+	/*
+	//버튼 이미지 불러오기
+	CImage WrapImage;
+	HRESULT res = WrapImage.Load(_T(".\\res\\Arrow0a.ico"));
+	if (res != S_OK)
+	{
+		
+	}
+
+	HBITMAP bit;
+	bit = WrapImage.Detach();
+
+	m_wrapButton.m_nFlatStyle = CMFCButton::BUTTONSTYLE_NOBORDERS;
+	m_wrapButton.m_bTransparent = FALSE;
+	m_wrapButton.m_bDrawFocus = FALSE;
+	m_wrapButton.SetImage(bit, TRUE, NULL);
+	m_wrapButton.SetMouseCursorHand();
+	*/
+
 	//통신
 	SOCKET s = socketCreate();
 	if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
@@ -202,7 +238,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 	item.SessionKey = m_sessionkey;
 	
 
-	string str;
+	string str,str2;
 	if (sockSetting(s) == -1)
 		AfxMessageBox(_T("connection error!"), MB_OK);
 	else {
@@ -214,38 +250,51 @@ BOOL CEsperClientDlg::OnInitDialog()
 		socket_recv(s, &str);
 		
 
-		//AfxMessageBox((LPCTSTR)str.c_str(), MB_OK);
+		AfxMessageBox((LPCTSTR)str.c_str(), MB_OK);
 		//AfxMessageBox(str.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer1.c_str(), MB_OK);
 		//AfxMessageBox(resultpacketbuffer2.c_str(), MB_OK);
 		//AfxMessageBox(m_userid.c_str(), MB_OK);
 		//AfxMessageBox(m_sessionkey.c_str(), MB_OK);
-		str = "file1 : ";
+		str2 = "file1 : ";
 		for (unsigned int i = 0; i < finfo[0].userId.size();i++)
 			str.append(finfo[0].userId[i]);
-		str.append(",");
-		str.append(finfo[0].fileId);
-		str.append(",");
-		str.append(finfo[0].del);
+		str2.append(", ");
+		str2.append(finfo[0].fileId);
+		str2.append(", ");
+		str2.append(finfo[0].del);
 
-		//AfxMessageBox(str.c_str(), MB_OK);
+		AfxMessageBox(str2.c_str(), MB_OK);
 
 		
 		//TREE 만들기
 		m_hRoot = new HTREEITEM[2];
 		m_hKind = new HTREEITEM[5];
-		m_hRoot[0] = m_Tree.InsertItem(_T("test.hwp"), 0, 1);
-		m_hRoot[1] = m_Tree.InsertItem(_T("test2.hwp"), 0, 1);
+
+		m_ImageList1.Create(16, 16, ILC_MASK, 2, 2);
+		m_bitmap1.LoadBitmapA(IDB_FILE);
+		m_bitmap2.LoadBitmapA(IDB_USER);
+		m_ImageList1.Add(&m_bitmap1, RGB(255, 0, 255));
+		m_ImageList1.Add(&m_bitmap2, RGB(255, 0, 255));
+		
+		m_Tree.SetImageList(&m_ImageList1, TVSIL_NORMAL);
+		
+		m_hRoot[0] = m_Tree.InsertItem(_T("test.hwp"), 0, 0);
+		m_hRoot[1] = m_Tree.InsertItem(_T("test2.hwp"), 0, 0);
 		//m_Tree.SetFont(&m_font,1);
 
-		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[1] = m_Tree.InsertItem(_T("sangwoo"), 2, 2, m_hRoot[0], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("jwyang"), 2, 2, m_hRoot[0], TVI_LAST);
+		
+		
+		
+		m_Tree.SetImageList(&m_ImageList1, 1);
+		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 1, 1, m_hRoot[0], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("sangwoo"), 1, 1, m_hRoot[0], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("jwyang"), 1, 1, m_hRoot[0], TVI_LAST);
 		//m_hKind[3] = m_Tree.InsertItem(_T("사람4"), 2, 2, m_hRoot[0], TVI_LAST);
 
-		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[1] = m_Tree.InsertItem(_T("khkim"), 2, 2, m_hRoot[1], TVI_LAST);
-		m_hKind[2] = m_Tree.InsertItem(_T("jmhan"), 2, 2, m_hRoot[1], TVI_LAST);
+		m_hKind[0] = m_Tree.InsertItem(_T("idophio"), 1, 1, m_hRoot[1], TVI_LAST);
+		m_hKind[1] = m_Tree.InsertItem(_T("khkim"), 1, 1, m_hRoot[1], TVI_LAST);
+		m_hKind[2] = m_Tree.InsertItem(_T("jmhan"), 1, 1, m_hRoot[1], TVI_LAST);
 		//m_hKind[3] = m_Tree.InsertItem(_T("사람8"), 2, 2, m_hRoot[1], TVI_LAST);
 		
 		//m_Tree.Expand(m_hRoot[0], TVE_EXPAND);
@@ -650,4 +699,19 @@ void CEsperClientDlg::OnTreeselectDelete()
 		}
 	}
 		
+}
+
+
+void CEsperClientDlg::OnBnClickedMfcbutton1() // = OnBnClickedWrapbutton
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	this->OnMenuWrapping();
+
+}
+
+
+void CEsperClientDlg::OnBnClickedRefreshbutton()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	this->Invalidate(TRUE);
 }

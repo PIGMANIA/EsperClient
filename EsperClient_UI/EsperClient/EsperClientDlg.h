@@ -5,6 +5,7 @@
 #pragma once
 #include "afxcmn.h"
 #include <string>
+#include "afxbutton.h"
 
 
 // CEsperClientDlg 대화 상자
@@ -15,6 +16,8 @@ public:
 	CEsperClientDlg(CWnd* pParent = NULL);	// 표준 생성자입니다
 	HTREEITEM* m_hRoot;
 	HTREEITEM* m_hKind;
+	CImageList m_ImageList1;
+	CBitmap m_bitmap1, m_bitmap2;
 	POINT m_oldpos;
 
 // 대화 상자 데이터입니다.
@@ -70,4 +73,8 @@ public:
 	afx_msg void OnNMRClickTree1(NMHDR *pNMHDR, LRESULT *pResult);
 	afx_msg void OnTreeselectAccess();
 	afx_msg void OnTreeselectDelete();
+	afx_msg void OnBnClickedMfcbutton1();
+	CMFCButton m_wrapButton;
+	afx_msg void OnBnClickedRefreshbutton();
+	CMFCButton m_refreshButton;
 };
