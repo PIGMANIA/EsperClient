@@ -96,13 +96,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\wooPC\Source\Repos\Esper\Client\EsperClient_UI\Lib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\wooPC\Source\Repos\EsperClient\EsperClient_UI\Lib\include;C:\Users\wooPC\Source\Repos\EsperClient\EsperClient_UI\JsonLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\wooPC\Source\Repos\Esper\Client\EsperClient_UI\Lib\lib;C:\Users\wooPC\Source\Repos\Esper\Client\EsperClient_UI\Json;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>cryptlib.lib;json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ForceFileOutput>
       </ForceFileOutput>
@@ -111,6 +110,7 @@
       </ModuleDefinitionFile>
       <AdditionalOptions>/FORCE %(AdditionalOptions)</AdditionalOptions>
       <UACExecutionLevel>RequireAdministrator</UACExecutionLevel>
+      <AdditionalLibraryDirectories>C:\Users\wooPC\Source\Repos\EsperClient\EsperClient_UI\Lib\lib;C:\Users\wooPC\Source\Repos\EsperClient\EsperClient_UI\JsonLib\Json;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
