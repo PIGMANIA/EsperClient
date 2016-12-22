@@ -179,6 +179,7 @@ void CAccessDlg::OnBnClickedOk()
 	item.UserId = m_userid;
 	item.SessionKey = m_sessionkey;
 	item.FileName = m_filename;
+	m_fileid = m_fileid.substr(0, m_fileid.length()-1);
 	item.FileId = m_fileid;
 
 

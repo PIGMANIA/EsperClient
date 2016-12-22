@@ -704,7 +704,7 @@ void CEsperClientDlg::OnTreeselectDelete()
 
 	}
 
-	AfxMessageBox(_T("fileid"));
+	AfxMessageBox(fileid.c_str());
 
 	std::string m_message = filename;
 	m_message.append("을 모든 유저로부터 삭제하시겠습니까?");
@@ -719,6 +719,7 @@ void CEsperClientDlg::OnTreeselectDelete()
 
 		Items item;
 		item.UserId = m_userid;
+		fileid = fileid.substr(0, fileid.length() - 1);
 		item.FileId = fileid;
 		item.SessionKey = m_sessionkey;
 		//finfo[].
