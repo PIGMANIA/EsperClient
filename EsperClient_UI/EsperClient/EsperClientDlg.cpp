@@ -72,7 +72,7 @@ void CEsperClientDlg::SetId(std::string param_id)
 CEsperClientDlg::CEsperClientDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_ESPERCLIENT_DIALOG, pParent), m_strEdit(_T(""))
 {
-	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_hIcon = AfxGetApp()->LoadIcon(IDI_ICON1);
 	m_oldpos.x = m_oldpos.y = 0;
 	m_isOpen = true;
 }
@@ -256,6 +256,8 @@ BOOL CEsperClientDlg::OnInitDialog()
 		//AfxMessageBox(resultpacketbuffer2.c_str(), MB_OK);
 		//AfxMessageBox(m_userid.c_str(), MB_OK);
 		//AfxMessageBox(m_sessionkey.c_str(), MB_OK);
+		
+		/*
 		str2 = "file1 : ";
 		for (unsigned int i = 0; i < finfo[0].userId.size();i++)
 			str.append(finfo[0].userId[i]);
@@ -263,8 +265,9 @@ BOOL CEsperClientDlg::OnInitDialog()
 		str2.append(finfo[0].fileId);
 		str2.append(", ");
 		str2.append(finfo[0].del);
+		
 
-		AfxMessageBox(str2.c_str(), MB_OK);
+		AfxMessageBox((LPCTSTR)str2.c_str(), MB_OK);
 
 		
 		//TREE ¸¸µé±â
@@ -330,16 +333,16 @@ BOOL CEsperClientDlg::OnInitDialog()
 			m_hRoot[i] = m_Tree.InsertItem(&tvInsert);*/
 
 			//AfxMessageBox(finfo[i].fileName.c_str());
-			m_hKind = new HTREEITEM[finfo[i].userId.size()];
+			//m_hKind = new HTREEITEM[finfo[i].userId.size()];
 			//AfxMessageBox(std::to_string(finfo[i].userId.size()).c_str());
-			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
+			//for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{
 				//m_hKind[j] = m_Tree.InsertItem(finfo[i].userId[j].c_str(), 2, 2, m_hRoot[i], TVI_LAST);
 				
 			}
 				
 			//AfxMessageBox(_T("Clear"));
-		}		
+		//}		
 
 		closesocket(s);
 		WSACleanup();

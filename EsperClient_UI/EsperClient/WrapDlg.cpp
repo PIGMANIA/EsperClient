@@ -206,13 +206,13 @@ void CWrapDlg::OnBnClickedOk()
 			wstring temp = wstring(strOutputFile.begin(), strOutputFile.end());
 			CString outfilePath = temp.c_str();
 			DeleteFile(outfilePath);
-			AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+			AfxMessageBox(_T("서버와 통신이 실패했습니다.1"));
 		}
 
 	}
 	else
 	{
-		AfxMessageBox(_T("서버와 통신이 실패했습니다."));
+		AfxMessageBox(_T("서버와 통신이 실패했습니다.2"));
 	}
 
 	closesocket(s);
