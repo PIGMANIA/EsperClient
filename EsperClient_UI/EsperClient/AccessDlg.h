@@ -10,6 +10,7 @@ class CAccessDlg : public CDialogEx
 
 public:
 	CAccessDlg(CWnd* pParent = NULL);   // 표준 생성자입니다.
+	CAccessDlg(std::string fileid, CWnd* pParent = NULL) { m_fileid = fileid; }
 	virtual ~CAccessDlg();
 	virtual BOOL OnInitDialog();
 
@@ -26,7 +27,8 @@ public:
 	Items item;
 	afx_msg void OnBnClickedAccessBttAdd();
 	CListBox m_authlistctrl;
-	std::string m_userid, m_sessionkey, m_filename;
+	std::string m_userid, m_sessionkey, m_filename, m_fileid;
+	void setFileid(std::string fileid) { m_fileid = fileid; }
 	void setFilename(std::string file) { m_filename = file; }
 	afx_msg void OnBnClickedOk();
 };

@@ -162,5 +162,8 @@
     <Image Include="res\espermain.ico">
       <Filter>리소스 파일</Filter>
     </Image>
+    <Image Include="res\espericon.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

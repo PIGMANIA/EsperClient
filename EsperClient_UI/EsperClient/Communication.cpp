@@ -35,7 +35,7 @@ int sockSetting(SOCKET s) {
 	SOCKADDR_IN addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(8000);
-	addr.sin_addr.s_addr = inet_addr("165.132.120.126");
+	addr.sin_addr.s_addr = inet_addr("165.132.120.132");
 	return connect(s, (SOCKADDR*)&addr, sizeof(addr));
 }
 
@@ -120,8 +120,6 @@ int socket_send(int socket, string Type, Items item) {
 	else if (Type == "remoteDel") {
 		root["UserID"] = item.UserId;
 		root["FileID"] = item.FileId;
-		root["Del"] = item.del;
-		root["AccessorId"] = item.AccessorID;
 		root["SessionKey"] = item.SessionKey;
 	}
 	else if (Type == "accessorCheck") {
@@ -131,9 +129,8 @@ int socket_send(int socket, string Type, Items item) {
 	}
 	else if (Type == "authUpdate") {
 		root["UserID"] = item.UserId;
-		root["Filename"] = item.FileName;
-		root["del"] = item.del;
-		root["SessionKey"] = item.SessionKey;
+		root["FileID"] = item.FileId;
+		
 		Json::Value accessors;
 		Json::Value access;
 		
@@ -143,6 +140,7 @@ int socket_send(int socket, string Type, Items item) {
 		}
 
 		root["Accessor"] = access;
+		root["SessionKey"] = item.SessionKey;
 	}
 	else if (Type == "fileListReq") {
 		root["UserID"] = item.UserId;
@@ -499,10 +497,10 @@ int socket_recv(int socket, std::string *str )
 					
 					Filecomp = File[i][1]["fileId"];
 					finfo[i].fileId = fastwriter.write(Filecomp);
-					finfo[i].fileId = finfo[i].fileId.substr(1, (finfo[i].fileId.length() - 2));
+					finfo[i].fileId = finfo[i].fileId.substr(0, (finfo[i].fileId.length() ));
 					Filecomp = File[i][3]["del"];
 					finfo[i].del = fastwriter.write(Filecomp);
-					finfo[i].del = finfo[i].del.substr(1, finfo[i].del.length() - 2);
+					finfo[i].del = finfo[i].del.substr(0, finfo[i].del.length() );
 					Filecomp = File[i][0]["fileName"];
 					finfo[i].fileName = fastwriter.write(Filecomp);
 					finfo[i].fileName = finfo[i].fileName.substr(1, finfo[i].fileName.length() - 3);

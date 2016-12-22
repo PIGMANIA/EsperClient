@@ -43,6 +43,9 @@ BOOL CAccessDlg::OnInitDialog()
 	SetDlgItemText(IDC_ACCESS_STATIC_USERNAME, m_userid.c_str());
 	SetDlgItemText(IDC_ACCESS_STATIC_FILENAME, m_filename.c_str());
 
+	AfxMessageBox(m_fileid.c_str());
+	AfxMessageBox(m_filename.c_str());
+
 	return TRUE;  // return TRUE unless you set the focus to a control
 				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }
@@ -127,11 +130,11 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 	//통신 목표 설정
 	SOCKET s = socketCreate();
 	if (s == SOCKET_ERROR) AfxMessageBox(_T("socket error!"), MB_OK);
-
+	/*
 	SOCKADDR_IN addr;
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(4500);
-	addr.sin_addr.s_addr = inet_addr("165.132.144.106");
+	addr.sin_addr.s_addr = inet_addr("165.132.144.106");*/
 	//if (connect(s, (SOCKADDR*)&addr, sizeof(addr)) == -1) {
 	//	AfxMessageBox(_T("connection(dir) error!"), MB_OK);
 	//}
@@ -145,14 +148,12 @@ void CAccessDlg::OnBnClickedAccessBttAdd()
 	}
 	std::string strtemp;
 	socket_recv(s, &strtemp);
-	AfxMessageBox(_T("1"));
 	if (resultpacketbuffer1 == "succ")
 	{
-		AfxMessageBox(_T("2"));
 		m_authlistctrl.AddString(str);
 		UpdateData(TRUE);
 		item.Accessor.push_back(tempstr);
-		AfxMessageBox(_T("3"));
+		AfxMessageBox(tempstr.c_str());
 	}
 	else if (resultpacketbuffer1 == "fail")
 	{
@@ -178,6 +179,9 @@ void CAccessDlg::OnBnClickedOk()
 	item.UserId = m_userid;
 	item.SessionKey = m_sessionkey;
 	item.FileName = m_filename;
+	item.FileId = m_fileid;
+
+
 	
 	//통신 목표 설정
 	SOCKET s = socketCreate();
@@ -199,6 +203,7 @@ void CAccessDlg::OnBnClickedOk()
 	string strtemp;	 
 	AfxMessageBox(_T("Here1"));
 	socket_recv(s, &strtemp);
+	AfxMessageBox(resultpacketbuffer1.c_str());
 	if (resultpacketbuffer2 == "succ")
 	{
 		AfxMessageBox(_T("접근 권한이 변경되었습니다."));

@@ -256,6 +256,7 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\temp\wrap.ico" />
     <Image Include="res\bitmap2.bmp" />
+    <Image Include="res\espericon.ico" />
     <Image Include="res\espermain.ico" />
     <Image Include="res\file.bmp" />
     <Image Include="res\file2.bmp" />
