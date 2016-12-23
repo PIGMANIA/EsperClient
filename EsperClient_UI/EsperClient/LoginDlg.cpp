@@ -129,6 +129,7 @@ void LoginDlg::OnBnClickedOk()
 		if (resultpacketbuffer3 == "refusal")
 			AfxMessageBox(TEXT("Access denied"), MB_OK );
 		else if(resultpacketbuffer3=="approval") {
+			//AfxMessageBox("approval");
 			ofstream fout;
 			fout.open("C:\\Program Files (x86)\\Esper\\idsk.txt");
 			fout << resultpacketbuffer1 << std::endl;

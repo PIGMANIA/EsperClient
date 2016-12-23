@@ -274,7 +274,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		str2.append(finfo[0].del);
 		
 
-		AfxMessageBox((LPCTSTR)str2.c_str(), MB_OK);
+		//AfxMessageBox((LPCTSTR)str2.c_str(), MB_OK);
 		
 
 		
@@ -326,6 +326,7 @@ BOOL CEsperClientDlg::OnInitDialog()
 		{
 			//AfxMessageBox(_T("Round"));
 			m_Tree.SetImageList(&m_ImageList1, 0);
+			
 			m_hRoot[i] = m_Tree.InsertItem(finfo[i].fileName.c_str(),0,0);
 			
 			//m_hRoot[i] = m_Tree.InsertItem(_T("abc"), 0, 1);
@@ -352,8 +353,10 @@ BOOL CEsperClientDlg::OnInitDialog()
 			for (unsigned int j = 0; j < finfo[i].userId.size(); j++)			
 			{			
 				//m_Tree.SetImageList(&m_ImageList1, 1);
-				strUserid = finfo[i].userId[j].substr(1, finfo[i].userId[j].length()-3);
+				
+				strUserid = finfo[i].userId[j].substr(1, finfo[i].userId[j].length() - 3);
 				m_hKind[j] = m_Tree.InsertItem(strUserid.c_str(), 1, 1, m_hRoot[i], TVI_LAST);
+				
 								
 			}
 				
@@ -678,7 +681,7 @@ void CEsperClientDlg::OnTreeselectAccess()
 
 	dlg.setFilename(filename);
 	dlg.setFileid(fileid);
-	AfxMessageBox(fileid.c_str());
+	//AfxMessageBox(fileid.c_str());
 	dlg.DoModal();
 	
 }
@@ -704,7 +707,7 @@ void CEsperClientDlg::OnTreeselectDelete()
 
 	}
 
-	AfxMessageBox(fileid.c_str());
+	//AfxMessageBox(fileid.c_str());
 
 	std::string m_message = filename;
 	m_message.append("을 모든 유저로부터 삭제하시겠습니까?");
@@ -732,19 +735,19 @@ void CEsperClientDlg::OnTreeselectDelete()
 				item.FileId = finfo[i].fileId;
 		}
 		*/
-
+		
 		string str;
 		if (sockSetting(s) == -1)
 			AfxMessageBox(_T("connection error!"), MB_OK);
 		else {
 			socket_send(s, "remoteDel", item);
 			string result[20];
-
+			
 			//if()
 
 			socket_recv(s, &str);
-			AfxMessageBox(str.c_str());
-
+			//AfxMessageBox(str.c_str());
+			
 
 			if (resultpacketbuffer1 == "succ")
 			{
@@ -771,5 +774,13 @@ void CEsperClientDlg::OnBnClickedMfcbutton1() // = OnBnClickedWrapbutton
 void CEsperClientDlg::OnBnClickedRefreshbutton()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	this->Invalidate(TRUE);
+	
+	
+	CEsperClientDlg dlg;
+	dlg.SetId(m_userid);
+	ShowWindow(SW_HIDE);
+	dlg.DoModal();
+
+	
+	
 }

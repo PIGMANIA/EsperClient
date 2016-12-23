@@ -77,12 +77,12 @@ BOOL CEsperClientApp::InitInstance()
 
 	CCommandLineInfo cmdInfo;
 	ParseCommandLine(cmdInfo);
-	AfxMessageBox(_T(" 진입점 Test "));
+	//AfxMessageBox(_T(" 진입점 Test "));
 	
 	INT_PTR nResponse;
 	if(m_lpCmdLine[0]=='\0')
 	{
-		AfxMessageBox(m_lpCmdLine);
+		//AfxMessageBox(m_lpCmdLine);
 		LoginDlg dlg;
 		m_pMainWnd = &dlg;
 		nResponse = dlg.DoModal();
@@ -90,12 +90,12 @@ BOOL CEsperClientApp::InitInstance()
 
 	else
 	{
-		AfxMessageBox(m_lpCmdLine);
+		//AfxMessageBox(m_lpCmdLine);
 		CString path(m_lpCmdLine);
 		path = path.Mid(1, path.GetLength() - 2);
 		int index = path.ReverseFind('\\');
 		CString name(path.Mid(index+1, path.GetLength()-1));
-		AfxMessageBox(name);
+		//AfxMessageBox(name);
 		CWrapDlg dlg(name, path);
 		m_pMainWnd = &dlg;
 		nResponse = dlg.DoModal();

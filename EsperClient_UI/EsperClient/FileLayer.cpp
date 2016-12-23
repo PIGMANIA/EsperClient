@@ -98,6 +98,41 @@ std::string CEncrypt::EncodeByBase64(unsigned char const* bytes_to_encode, unsig
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD CEncrypt::ReadRequestedHeaderFile(std::string &refstrInputFileName)
+{
+	FILE *pFile = NULL;
+	DWORD dwErr;
+	dwErr = ::fopen_s(&pFile, refstrInputFileName.c_str(), "rb");
+	if (dwErr != 0) {
+		printf("Cannot read file [%s]\n", refstrInputFileName.c_str());
+		return 0;
+	}
+
+	fseek(pFile, 0, SEEK_END);
+	DWORD dwSize = ftell(pFile);
+	printf("File Data Size : [%d]\n", dwSize);
+
+	fseek(pFile, 0, SEEK_SET);
+
+	int readn = 0;
+	DWORD dwTotal = 0;
+
+	ST_BLOCK_RAW_DATA stBlockRawData;
+	readn = fread(stBlockRawData.szBuf, 1, sizeof(stBlockRawData.szBuf), pFile);
+	if (readn < 0) {
+		printf("Cannot read data from file\n");
+
+		::fclose(pFile);
+		return 0;
+	}
+	stBlockRawData.dwUsedSize = readn;
+	m_stFileLayer.stFileLayerBody.vecstBlockRawData.push_back(stBlockRawData);
+
+	::fclose(pFile);
+	return 1;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
 DWORD CEncrypt::ReadRequestedFile(std::string &refstrInputFileName)
 {
 	FILE *pFile = NULL;
@@ -163,7 +198,7 @@ DWORD CEncrypt::ExecuteCryptoOperation()
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
-DWORD CEncrypt::WriteToFile(const std::string &refstrOutputFilePath, std::string &refstrOutputFileName)
+DWORD CEncrypt::WriteToFile(const std::string &refstrInputFileName, const std::string &refstrOutputFilePath, std::string &refstrOutputFileName)
 {
 	FILE *pFile = NULL;
 	DWORD dwErr;
@@ -194,7 +229,38 @@ DWORD CEncrypt::WriteToFile(const std::string &refstrOutputFilePath, std::string
 		return 0;
 	}
 
+	FILE *pInputFile = NULL;
+	dwErr = ::fopen_s(&pInputFile, refstrInputFileName.c_str(), "rb");
+	if (dwErr != 0) {
+		printf("Cannot read file [%s]\n", refstrInputFileName.c_str());
+		return 0;
+	}
+
+	fseek(pInputFile, 0, SEEK_END);
+	fseek(pInputFile, 512, SEEK_SET);
+
+	int readn = 0;
+	char tBuffer[4096] = { 0 };
+	int number = 0;
+	unsigned int total = 0;
+	while (1) {
+		readn = fread(tBuffer, 1, sizeof(tBuffer), pInputFile);
+		if (readn <= 0) {
+			break;
+		}
+
+
+		nRet = fwrite(tBuffer, 1, readn, pFile);
+		if (nRet != readn) {
+			printf("Cannot write encoded data to file\n");
+			break;
+		}
+		total += readn;
+		printf("count %d %d\n", number++, readn);
+	}
+
 	refstrOutputFileName = strOutputFileName;
+	::fclose(pInputFile);
 	::fclose(pFile);
 	return 1;
 }
@@ -266,6 +332,41 @@ std::string CDecrypt::DecodeByBase64(std::string const& encoded_string)
 	return ret;
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+DWORD CDecrypt::ReadRequestedHeaderFile(std::string &refstrInputFileName)
+{
+	FILE *pFile = NULL;
+	DWORD dwErr;
+	dwErr = ::fopen_s(&pFile, refstrInputFileName.c_str(), "rb");
+	if (dwErr != 0) {
+		printf("Cannot read file [%s]\n", refstrInputFileName.c_str());
+		return 0;
+	}
+
+	fseek(pFile, 0, SEEK_END);
+	DWORD dwSize = ftell(pFile);
+	printf("File Data Size : [%d]\n", dwSize);
+
+	fseek(pFile, 0, SEEK_SET);
+
+	int readn = 0;
+	DWORD dwTotal = 0;
+
+	ST_BLOCK_RAW_DATA stBlockRawData;
+	readn = fread(stBlockRawData.szBuf, 1, sizeof(stBlockRawData.szBuf), pFile);
+	if (readn < 0) {
+		printf("Cannot read data from file\n");
+
+		::fclose(pFile);
+		return 0;
+	}
+	stBlockRawData.dwUsedSize = readn;
+	m_stFileLayer.stFileLayerBody.vecstBlockRawData.push_back(stBlockRawData);
+
+	::fclose(pFile);
+	return 1;
+}
+
 DWORD CDecrypt::ReadRequestedFile(std::string &refstrInputFileName)
 {
 	FILE *pFile = NULL;
@@ -284,8 +385,7 @@ DWORD CDecrypt::ReadRequestedFile(std::string &refstrInputFileName)
 
 	int readn = 0;
 	DWORD dwTotal = 0;
-	do
-	{
+	for (int i = 0; i < 2; i++) {
 		ST_BLOCK_ENC_DATA stBlockEncData;
 		readn = fread((unsigned char *)stBlockEncData.szBuf, 1, sizeof(stBlockEncData.szBuf), pFile);
 		if (readn < 0) {
@@ -296,7 +396,7 @@ DWORD CDecrypt::ReadRequestedFile(std::string &refstrInputFileName)
 		m_stFileLayer.stFileLayerBody.vecstBlockEncData.push_back(stBlockEncData);
 
 		dwTotal += readn;
-	} while (dwTotal < dwSize);
+	}
 
 	::fclose(pFile);
 	return 1;
@@ -332,13 +432,13 @@ DWORD CDecrypt::ExecuteCryptoOperation()
 	return 1;
 }
 
-DWORD CDecrypt::WriteToFile(const std::string &refstrOutputFilePath, std::string &refstrOutputFileName)
+DWORD CDecrypt::WriteToFile(const std::string &refstrInputFileName, const std::string &refstrOutputFilePath, std::string &refstrOutputFileName)
 {
 	FILE *pFile = NULL;
 	DWORD dwErr;
 
 	std::string strOutputFileName;
-	strOutputFileName = refstrOutputFilePath + "\\" + refstrOutputFileName + "." + m_stFileAttr.strFileOriginExt;
+	strOutputFileName = refstrOutputFilePath + "\\" + refstrOutputFileName + ".hwp";// +m_stFileAttr.strFileOriginExt;
 
 	dwErr = ::fopen_s(&pFile, strOutputFileName.c_str(), "wb");
 	if (dwErr != 0) {
@@ -366,7 +466,38 @@ DWORD CDecrypt::WriteToFile(const std::string &refstrOutputFilePath, std::string
 		return 0;
 	}
 
+	FILE *pInputFile = NULL;
+	dwErr = ::fopen_s(&pInputFile, refstrInputFileName.c_str(), "rb");
+	if (dwErr != 0) {
+		printf("Cannot read file [%s]\n", refstrInputFileName.c_str());
+		return 0;
+	}
+
+	fseek(pInputFile, 0, SEEK_END);
+	fseek(pInputFile, 688 * 2, SEEK_SET);
+
+	int readn = 0;
+	char tBuffer[4096] = { 0 };
+	int number = 0;
+	unsigned int total = 0;
+	while (1) {
+		readn = fread(tBuffer, 1, sizeof(tBuffer), pInputFile);
+		if (readn <= 0) {
+			break;
+		}
+
+
+		nRet = fwrite(tBuffer, 1, readn, pFile);
+		if (nRet != readn) {
+			printf("Cannot write encoded data to file\n");
+			break;
+		}
+		total += readn;
+		printf("count %d %d\n", number++, readn);
+	}
+
 	refstrOutputFileName = strOutputFileName;
+	::fclose(pInputFile);
 	::fclose(pFile);
 	return 1;
 }
@@ -427,7 +558,7 @@ DWORD EncryptFileLayer(ST_FILE_LAYER_HEADER &refstFileLayerHeader, std::string &
 	DWORD dwRet;
 	try
 	{
-		dwRet = pEncrypt->ReadRequestedFile(refstrInputFullFileName);
+		dwRet = pEncrypt->ReadRequestedHeaderFile(refstrInputFullFileName);
 		if (dwRet == 0) {
 			throw std::exception();
 		}
@@ -437,7 +568,7 @@ DWORD EncryptFileLayer(ST_FILE_LAYER_HEADER &refstFileLayerHeader, std::string &
 		}
 
 		std::string strOutputFileName = "output";
-		dwRet = pEncrypt->WriteToFile(refstrOutputFilePath, strOutputFileName);
+		dwRet = pEncrypt->WriteToFile(refstrInputFullFileName, refstrOutputFilePath, strOutputFileName);
 		if (dwRet == 0) {
 			throw std::exception();
 		}
@@ -464,8 +595,6 @@ DWORD DecryptFileLayer(ST_FILE_ATTR &refstFileAttr, std::string &refstrInputFull
 	std::string strFileName, strFileExtension;
 	GetFileName(refstrInputFullFileName, strFileName, strFileExtension);
 
-	//FileLayer.SetFileAttr(refstFileAttr);
-
 	DWORD dwRet;
 	try
 	{
@@ -479,7 +608,7 @@ DWORD DecryptFileLayer(ST_FILE_ATTR &refstFileAttr, std::string &refstrInputFull
 		}
 
 		std::string strOutputFileName = "output";
-		dwRet = pDecrypt->WriteToFile(refstrOutputFilePath, strOutputFileName);
+		dwRet = pDecrypt->WriteToFile(refstrInputFullFileName, refstrOutputFilePath, strOutputFileName);
 		if (dwRet == 0) {
 			throw std::exception();
 		}

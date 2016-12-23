@@ -27,9 +27,10 @@ public:
 	CFileLayer();
 	~CFileLayer();
 
+	virtual DWORD ReadRequestedHeaderFile(std::string &refstrInputFileName) { return 1; }
 	virtual DWORD ReadRequestedFile(std::string &refstrInputFileName) { return 1; }
 	virtual DWORD ExecuteCryptoOperation() { return 1; }
-	virtual DWORD WriteToFile(const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) { return 1; }
+	virtual DWORD WriteToFile(const std::string &refstrInputFileName, const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) { return 1; }
 };
 
 class CEncrypt : public CFileLayer
@@ -44,9 +45,10 @@ public:
 	inline VOID SetFileAttr(ST_FILE_ATTR &refstFileAttr) { m_stFileAttr = refstFileAttr; }
 	inline VOID SetFileHeader(ST_FILE_LAYER_HEADER &refstFileLayerHeader) { m_stFileLayer.stFileLayerHeader = refstFileLayerHeader; }
 
+	DWORD ReadRequestedHeaderFile(std::string &refstrInputFileName) override;
 	DWORD ReadRequestedFile(std::string &refstrInputFileName) override;
 	DWORD ExecuteCryptoOperation() override;
-	DWORD WriteToFile(const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) override;
+	DWORD WriteToFile(const std::string &refstrInputFileName, const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) override;
 };
 
 class CDecrypt : public CFileLayer
@@ -59,9 +61,10 @@ class CDecrypt : public CFileLayer
 public:
 	CDecrypt();
 
+	DWORD ReadRequestedHeaderFile(std::string &refstrInputFileName) override;
 	DWORD ReadRequestedFile(std::string &refstrInputFileName) override;
 	DWORD ExecuteCryptoOperation() override;
-	DWORD WriteToFile(const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) override;
+	DWORD WriteToFile(const std::string &refstrInputFileName, const std::string &refstrOutputFilePath, std::string &refstrOutputFileName) override;
 };
 
 void HexToByte(const char *pIn, DWORD dwLen, BYTE *pOut);
